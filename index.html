@@ -1,0 +1,275 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Shaken, not Stirred: Using Spies in Jasmine</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css" id="theme">
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<div class="container">
+						<div class="item">
+							<img src="images/spy2.jpeg" width="350px" style="float:left;"/>
+						</div>
+						<div class="item">
+							<h3>Shaken, not Stirred</h3>
+							<h1>Using Spies in Jasmine</h1>
+							<hr>
+							<small>Created by <a href="mailto:danielle.c.closs@gmail.com">Danielle Closs</a> / <a href="http://twitter.com/daniellecloss">@daniellecloss</a></small>
+							<br>
+							<a href="http://www.daniellecloss.com"><img src="images/logo.svg" width="100px"/></a>
+						</div>
+						<div class="item">
+							<img src="images/spy1.jpeg" width="400px" style="float:right;"/>
+						</div>
+					</div>
+					<aside class="notes">
+						1 of 14<br>
+						Hello!  I'm Danielle.  I am a UI Web developer at Arbor Networks. Sometimes I spy on my Javascript code, occassionally with a drink in hand, using Jasmine Spies.
+					</aside>
+				</section>
+				<section>
+					<div class="container">
+						<div class="item">
+							<h1>What is a<br>Jasmine Spy?</h1>
+							<img src="images/spy1.gif" width="300px">
+						</div>
+					</div>
+					<aside class="notes">
+						2 of 14<br>
+						So, you may be wondering what a Jasmine Spy is, or for that matter, what Jasmine is.  Jasmine is a testing framework for Javascript....
+					</aside>
+				</section>
+				<section>
+					<h2>A Jasmine Spy Function is...</h2>
+					<p>...just another function, written inside a Jasmine test.</p>
+					<p>It is generally written to "mock" an existing function, so that you control the function implementation.</p>
+					<img src="images/maxresdefault.jpg" width="500px"/>
+					<aside class="notes">
+						3 of 14<br>
+						....and a Jasmine Spy function is basically a mock function, also known as a test double function, that can be used in place of an actual function in your code.  Generally speaking, you want to use Jasmine Spies when you want more control over your testing implementation.
+					</aside>
+				</section>
+				<section>
+					<h2>This is a Jasmine Spy Function</h2>
+<pre>
+<code data-trim data-noescape>
+Spy.modify_secret = function() {
+  var secret = Spy.tell_secret();
+  Spy.secret = secret + " either";
+};
+spyOn(Spy, 'modify_secret');
+</code>
+</pre>
+					<p>The key is the spyOn() method, the rest is just javascript!</p>
+					<aside class="notes">
+						4 of 14<br>
+						This is what a basic Jasmine Spy function looks like. It's really just a javascript function, that you can easily control, which mimicks a function from your code. It's a "copy" of that function that you have control of.  Then you can spy on that function, as well as the actual functions that you are testing.
+					</aside>
+				</section>
+				<section>
+					<h2>In the <span class="title_code_reformat">beforeEach()</span> Block</h2>
+<pre>
+<code data-trim data-noescape>
+beforeEach(function() {
+   Spy.modify_secret = function() {
+      var secret = Spy.tell_secret();
+      Spy.secret = secret + " either";
+   };
+   spyOn(Spy, 'modify_secret').and.callThrough();
+});
+</code>
+</pre>
+					<p>the Spy is now accessible before each test</p>
+					<aside class="notes">
+						5 of 14<br>
+						A Jasmine Spy function can be placed in a beforeEach() block. When the function is put in a beforeEach() block, it is accessible to each test in that test suite.
+					</aside>
+				</section>
+				<section>
+					<h2>Create Assertions with Matchers</h2>
+<pre>
+<code data-trim data-noescape>
+it("tracks that the spy was called", function() {
+   expect(Spy.modify_secret).toHaveBeenCalled();
+});
+</code>
+</pre>
+					<p>the Spy can be tested, like any other function</p>
+					<aside class="notes">
+						6 of 14<br>
+						After you create a Jasmine Spy function, and spy on it, you can treat it like any other function in your test, and create assertions for it.  Jasmine Spies have special matchers, like this one, toHaveBeenCalled().  All this matcher does is verify that the function has been called at least one time.
+					</aside>
+				</section>
+				<section>
+					<h4>Using</h4>
+					<h2 class="title_code_reformat">.and.callThrough()</h2>
+<pre>
+<code data-trim data-noescape>
+spyOn(Spy, 'modify_secret').and.callThrough();
+</code>
+</pre>
+					<p>to follow through on the function call<br>(delegate to the actual implementation)</p>
+					<aside class="notes">
+						7 of 14<br>
+						While I was creating this sample code, I ran into an issue where my tests were failing, because chained functions past the first function were not being called. The and.callThrough() method allows a chain of functions to fully complete their code execution. If you don't use this method and you have chained function execution, the code will stop processing, and your tests will fail.
+					</aside>
+				</section>
+				<section>
+					<h4>Using</h4>
+					<h2 class="title_code_reformat">.and.returnValue()</h2>
+<pre>
+<code data-trim data-noescape>
+spyOn(Spy, 'modify_secret').and.returnValue();
+</code>
+</pre>
+					<p>to always return the same value from this spy</p>
+					<aside class="notes">
+						8 of 14<br>
+						Another useful method to use with your Jasmine Spies is and.returnValue(). This is another method that allows more control over the spy, by allowing you to always return the same value from your spy.
+					</aside>
+				</section>
+				<section>
+					<h2>Use Cases</h2>
+					<ul>
+						<li>mock an API call, if you don’t want to directly call your API during test running, and want more control over the returned data</li>
+						<li>mock whole libraries (like jQuery), which is useful when testing functionality tied to browser interactivity</li>
+					</ul>
+					<img src="images/Mad03_SpyVsSpy.jpg" width="500px">
+					<aside class="notes">
+						9 of 14<br>
+						Some common use cases for using Jasmine Spies are:<br>
+						- mocking an api call, which you want to have consistent return data from<br>
+						- mocking jQuery functions, to test event handlers, like button clicks<br>
+					</aside>
+				</section>
+				<section>
+					<h4>More Jasmine Spy Features</h4>
+					<h2>The <span class="title_code_reformat">.calls()</span> property</h2>
+					<ul>
+						<li><b>.calls.allArgs()</b> - returns arguments to all calls</li>
+						<li><b>.calls.all()</b> - returns context and arguments passed to all calls</li>
+						<li><b>.calls.mostRecent()</b> - returns context and arguments for the most recent call</li>
+						<li><b>.calls.first()</b> - returns context and arguments for the first call</li>
+					</ul>
+					<aside class="notes">
+						10 of 14<br>
+						Another popular feature of Jasmine Spies is the .calls property, which stores different types of information for the spies that are being used in your tests.  This information has to do with returning the context and arguments for all spy calls or specific spy calls.
+					</aside>
+				</section>
+
+				<section>
+					<h4>More Jasmine Spy Features</h4>
+					<h2>Other Spy Methods</h2>
+					<ul>
+						<li><b>.and.callFake()</b> - all calls to the spy will delegate to a supplied function</li>
+						<li><b>.and.throwError()</b> - all calls to the spy will throw the supplied error</li>
+						<li><b>.and.createSpy()</b> - create a generic “bare" spy</li>
+					</ul>
+					<aside class="notes">
+						11 of 14<br>
+						Here are some other Jasmine Spy methods that are useful.<br>
+						- callFake, which is a way to stub a new function on the fly<br>
+						- throwError, which will throw a specific error that you supply<br>
+						- createSpy, which creates a generic, empty spy implementation<br>
+					</aside>
+				</section>
+				<section>
+					<h4>All Code Examples at</h4>
+					<h2>Github</h2>
+					<p><a href="https://github.com/daniellecloss/jasmine-spies-code-sample">github.com/daniellecloss/jasmine-spies-code-sample</a></p>
+<pre>
+<code data-trim data-noescape>
+var Spy = require('../jasmine-spies.js');
+
+describe("A spy", function() {
+  var fetched_secret, secret;
+
+  beforeEach(function() {
+    Spy.modify_secret = function() {
+      var secret = Spy.tell_secret();
+      ...
+</code>
+</pre>
+					<aside class="notes">
+						12 of 14<br>
+						I have the code I used for these examples hosted at my github account, if you want to take a closer look.  In the repo, there is an object in one file (the code), and three tests and a mocked function, used with a Jasmine Spy, in the test spec.  You can install Jasmine, download the repo into a local folder, and just type Jasmine at the command line to run the tests.
+					</aside>
+				</section>
+				<section>
+					<h2>For More Information</h2>
+					<a href="http://jasmine.github.io/2.0/introduction.html#section-Spies">Jasmine Spies Documentation</a>
+					<p>All examples were using Jasmine 2.0 syntax, which has been updated from older versions of Jasmine</p>
+					<img src="images/spy-busstop.jpg" width="400px" />
+					<aside class="notes">
+						13 of 14<br>
+						All of these examples were using Jasmine 2.0.  Just an FYI, there were some specific syntax updates for Jasmine Spies in Jasmine version 2.0.
+
+					</aside>
+				</section>
+				<section>
+					<div class="container">
+						<div class="item">
+							<img src="images/spy1.jpeg" width="400px" style="float:left;"/>
+						</div>
+						<div class="item">
+							<br>
+							<h1>Thanks!</h1>
+							<br>
+							<hr>
+							<small style="white-space: nowrap;"><a href="mailto:danielle.c.closs@gmail.com">Danielle Closs</a> / <a href="http://twitter.com/daniellecloss">@daniellecloss</a></small>
+							<br>
+							<a href="http://www.daniellecloss.com"><img src="images/logo.svg" width="100px"/></a>
+						</div>
+						<div class="item">
+							<img src="images/spy2.jpeg" width="350px" style="float:right;"/>
+						</div>
+					</div>
+					<aside class="notes">
+						13 of 14<br>
+						Thanks for listening, and I hope I have been able to give you a quick taste of what it's like to use Jasmine Spies, so that you are thirsty for more :)
+					</aside>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+				center: false,
+				// showNotes: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
