@@ -46,13 +46,23 @@ html, body, .reveal div, .reveal span, .reveal applet, .reveal object, .reveal i
 
 }
 .item {flex-grow:1;}
-.reveal pre{box-shadow: none !important;
-	font-size:.7em !important;
-	line-height: 1.5em !important;
-}
-.reveal h2 .title_code_reformat,
-.reveal h2.title_code_reformat {
-	text-transform: initial !important;
+
+.reveal {
+	pre {
+		box-shadow: none !important;
+		font-size: .7em !important;
+		line-height: 1.5em !important;
+		margin: 0 auto !important;
+		width:95% !important;
+	}
+	h2 .title_code_reformat,
+	h2.title_code_reformat {
+  		text-transform: initial !important;
+	}
+	h2 {font-size: 1.5em !important;}
+	h4 {color:#8cd0d3 !important;}
+	small {font-style: italic !important;}
+	p {font-size:.92em !important;}
 }
 
 /*********************************************
