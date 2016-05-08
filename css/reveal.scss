@@ -60,9 +60,14 @@ html, body, .reveal div, .reveal span, .reveal applet, .reveal object, .reveal i
   		text-transform: initial !important;
 	}
 	h2 {font-size: 1.5em !important;}
-	h4 {color:#8cd0d3 !important;}
+	h4 {color:#42a8ae !important;}
 	small {font-style: italic !important;}
 	p {font-size:.92em !important;}
+	.highlight{
+		color:#42a8ae !important;
+		text-transform: uppercase;
+		font-size:.9em;
+	}
 }
 
 /*********************************************

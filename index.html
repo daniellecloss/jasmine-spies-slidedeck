@@ -162,7 +162,8 @@ beforeEach(function() {
 spyOn(Spy, 'call_api');
 </code>
 </pre>
-					<p>This is where the magic happens!  Spying on our function allows us to <b>track its implementation and usage</b>, with special Jasmine Spy methods and matchers.</p>
+					<p>This is where the <b>magic</b> happens!</p>
+					<p>Spying on our function allows us to <b>track its implementation and usage</b>, with special Jasmine Spy methods and matchers.</p>
 					<h4>Setup</h4>
 					<aside class="notes">
 						8 of 16<br>
@@ -233,6 +234,7 @@ it("when called, returns the requested value",
     expect(api_return_sue).toEqual('008');
     expect(api_return_fred)
       .toEqual('No knowledge of the existence of this one.');
+  });
 </code>
 </pre>
 					<p>After setting up our function, our API data, our tests, and our spy, we can use <b>any Jasmine matchers</b> to test our mock API data, like this matcher, toEqual().</p>
@@ -247,14 +249,14 @@ it("when called, returns the requested value",
 					<h4>Success! The tests passed!</h4>
 					<h2>Let's review!</h2>
 					<ol>
-						<li>[Setup] Set up the mock data.</li>
-						<li>[Setup] Set up the original function.</li>
-						<li>[Setup] Place the mock data in a beforeEach() block.</li>
-						<li>[Setup] Create your spy (in beforeEach()).</li>
-						<li>[Setup] Use and.callThrough() if needed (in beforeEach()).</li>
-						<li>[Setup] Put your "spied on" returns in variables (in beforeEach()).</li>
-						<li>[Testing] Create assertions with matchers.</li>
-						<li>[Testing] Test your API data.</li>
+						<li><span class="highlight">[Setup]</span> Set up the mock data.</li>
+						<li><span class="highlight">[Setup]</span> Set up the original function.</li>
+						<li><span class="highlight">[Setup]</span> Place the mock data in a beforeEach() block.</li>
+						<li><span class="highlight">[Setup]</span> Create your spy (in beforeEach()).</li>
+						<li><span class="highlight">[Setup]</span> Use and.callThrough() if needed (in beforeEach()).</li>
+						<li><span class="highlight">[Setup]</span> Put your "spied on" returns in variables (in beforeEach()).</li>
+						<li><span class="highlight">[Testing]</span> Create assertions with matchers.</li>
+						<li><span class="highlight">[Testing]</span> Test your API data.</li>
 					</ol>
 					<aside class="notes">
 						13 of 16<br>
