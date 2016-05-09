@@ -182,7 +182,7 @@ spyOn(Spy, 'call_api');
 Spy.call_api.and.callThrough();
 </code>
 </pre>
-					<p><b>WARNING</b>: Use and.callThrough() to follow through on the function calls (i.e.: delegate to the actual implementation), otherwise your tests can FAIL!</p>
+					<p><b>WARNING</b>: Use and.callThrough() to follow through on the function calls (i.e.: delegate to the actual implementation), otherwise our tests could FAIL!</p>
 					<h4>Setup</h4>
 					<aside class="notes">
 						9 of 16<br>
@@ -202,7 +202,7 @@ api_return_sue = Spy.call_api('Sue');
 api_return_fred = Spy.call_api('Fred');
 </code>
 </pre>
-					<p>Add the <b>return data to variables</b>,<br>to use with <b>matchers</b> inside your tests.</p>
+					<p>Add the <b>return data to variables</b>,<br>to use with <b>matchers</b> inside our tests.</p>
 					<h4>Setup</h4>
 					<aside class="notes">
 						10 of 16<br>
@@ -219,7 +219,7 @@ it("tracks that it has been called", function() {
 });
 </code>
 </pre>
-					<p>This Jasmine Spy matcher checks to see if this function has been <b>called at least one time</b>.  It might be nice to do this before testing your mocked API data, just to be sure!</p>
+					<p>This Jasmine Spy matcher checks to see if this function has been <b>called at least one time</b>.  It might be nice to do this before testing our mocked API data, just to be sure!</p>
 					<h4>Testing</h4>
 					<aside class="notes">
 						11 of 16<br>
@@ -251,14 +251,14 @@ it("when called, returns the requested value",
 					<h4>Success! The tests passed!</h4>
 					<h2>Let's review!</h2>
 					<ol>
-						<li><span class="highlight">[Setup]</span> Set up the mock data.</li>
-						<li><span class="highlight">[Setup]</span> Set up the original function.</li>
-						<li><span class="highlight">[Setup]</span> Place the mock data in a beforeEach() block.</li>
-						<li><span class="highlight">[Setup]</span> Create your spy (in beforeEach()).</li>
-						<li><span class="highlight">[Setup]</span> Use and.callThrough() if needed (in beforeEach()).</li>
-						<li><span class="highlight">[Setup]</span> Put your "spied on" returns in variables (in beforeEach()).</li>
-						<li><span class="highlight">[Testing]</span> Create assertions with matchers.</li>
-						<li><span class="highlight">[Testing]</span> Test your API data.</li>
+						<li><span class="highlight">[Setup]</span> Set up our mock data.</li>
+						<li><span class="highlight">[Setup]</span> Set up our original function.</li>
+						<li><span class="highlight">[Setup]</span> Placed our mock data in a beforeEach() block.</li>
+						<li><span class="highlight">[Setup]</span> Created our spy (in beforeEach()).</li>
+						<li><span class="highlight">[Setup]</span> Used and.callThrough() (in beforeEach()).</li>
+						<li><span class="highlight">[Setup]</span> Put our "spied on" returns in variables (in beforeEach()).</li>
+						<li><span class="highlight">[Testing]</span> Created our assertions with matchers.</li>
+						<li><span class="highlight">[Testing]</span> Tested our API data.</li>
 					</ol>
 					<aside class="notes">
 						13 of 16<br>
