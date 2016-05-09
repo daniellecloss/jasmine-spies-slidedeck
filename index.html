@@ -44,7 +44,7 @@
 					</div>
 					<aside class="notes">
 						1 of 16<br>
-						Hello!  I'm Danielle, and I am a UI Web developer at Arbor Networks. Sometimes I spy on my Javascript code, occassionally with a drink in hand, using Jasmine Spies.
+						Hello!  I'm Danielle, and I am a UI Web developer at Arbor Networks. Sometimes I spy on my Javascript code, occasionally with a drink in hand, using Jasmine Spies.
 					</aside>
 				</section>
 				<section>
@@ -78,8 +78,8 @@
 					<img src="images/Mad03_SpyVsSpy.jpg" width="500px">
 					<aside class="notes">
 						4 of 16<br>
-						Some common use cases for using Jasmine Spies are:<br>
-						- mocking an api call or the return data, allowing controlled and consistent return data<br>
+						Some common use cases for Jasmine Spies are:<br>
+						- mocking an API call or the return data, allowing controlled and consistent return data, independant of the API service<br>
 						- mocking jQuery functions, to test event handlers, like button clicks<br>
 					</aside>
 				</section>
@@ -102,8 +102,8 @@ Spy.api_data = {
 					<h4>Setup</h4>
 					<aside class="notes">
 						5 of 16<br>
-						Mocking an API data return, that sounds pretty sweet, right?  It is one of the many things you can do with Jasmine Spies.<br>
-						To start mocking a data return for an api, you basically create a copy of the api data, in the format that you would normally expect back from your api, but in this case, you have full control of what is contained in this data. Then you don't have to worry about things like if the api is accessible during the tests.
+						Mocking an API data return, that sounds pretty sweet, right?  It is one of the many things you can do with Jasmine Spies.  Let's walk through an example...<br>
+						To start mocking a data return for an API, you basically create a copy of the API data, in the format that you would normally expect back from your API, but in this case, you have full control of what is contained in this data. Then you don't have to worry about things like if the API is accessible during the tests.
 					</aside>
 				</section>
 				<section>
@@ -127,7 +127,7 @@ Spy.call_api = function(spy_name) { // testing this
 					<aside class="notes">
 						6 of 16<br>
 						This is the actual function that we are testing, the call_api function.<br>
-						I did shortcut this code a bit, to make it easier to read and understand for this talk.  Normally you would have some kind of an ajax call for your api, or some other async implementation, but this should be enough for this example.  Honestly, I can only fit so much on these slides, so just use your imagination :)<br>
+						I did shortcut this code a bit, to make it easier to understand for this talk.  Normally you would have some kind of async implementation, but this should be enough for this example.  Honestly, I can only fit so much on these slides, so use your imagination :)<br>
 						Notice the api_data property here, in our code to test, is an empty object...
 					</aside>
 				</section>
@@ -150,7 +150,7 @@ beforeEach(function() {
 					<h4>Setup</h4>
 					<aside class="notes">
 						7 of 16<br>
-						...and here, in our test suite, the api_data property has data in the object.  Nifty, huh?<br>
+						...and here, in our test suite, the api_data property has data in the object.  Nice, huh?<br>
 						For our example, our Jasmine API mock data is placed in a beforeEach() block. When the mocked data or function is put in a beforeEach() block, it is accessible to each test in that test suite.
 					</aside>
 				</section>
@@ -169,7 +169,7 @@ spyOn(Spy, 'call_api');
 					<h4>Setup</h4>
 					<aside class="notes">
 						8 of 16<br>
-						This is where we actually attach the spy implementation to our function call, using spyOn.  The first param for the spyOn function is the actual object we are testing, and the second param is the method name, and yes, it is in quotes.  Not sure why, but that's how it works!
+						This is where we actually attach the spy implementation to our function call, using spyOn.  The first param for the spyOn function is the actual object we are testing, and the second param, in quotes, is the method name. Yes, I did say, in quotes.  Not sure why, but that's how it works!
 					</aside>
 				</section>
 				<section>
@@ -186,7 +186,7 @@ Spy.call_api.and.callThrough();
 					<h4>Setup</h4>
 					<aside class="notes">
 						9 of 16<br>
-						While I was creating this sample code, I ran into an issue where my tests were failing, because functions were not following through on their actual implementation, or there were chained functions.   In these scenarios, you need to use the and.callThrough() method, which allows your code to keep running through it's normal process.  If you don't use this method and you have chained function execution or a function that needs to follow through, the code will stop processing, and your tests will fail.
+						While I was creating this sample code, I ran into an issue where my tests were failing, because functions were not following through on their actual implementation.   In this case, you need to use the and.callThrough() method, which allows your code to keep running through it's normal process.  If you don't use this method and you have chained function execution or a function that needs to follow through, the code will stop processing, and your tests will fail.
 					</aside>
 				</section>
 				<section>
@@ -206,7 +206,7 @@ api_return_fred = Spy.call_api('Fred');
 					<h4>Setup</h4>
 					<aside class="notes">
 						10 of 16<br>
-						To make things easier to test in the "it" blocks, I added the returns from the spied on function to variables that were accessible in the whole test suite, also in the beforeEach() block. This way I could just assert against the variables, instead of passing values around.  I also think it is a bit more readable!
+						To make things easier to test in the "it" blocks, I added the returns from the spied on function to variables that were accessible to the whole test suite, placed in the beforeEach() block. This way I could just assert against the variables, instead of passing values around.  I also think it is a bit more readable!
 					</aside>
 				</section>
 				<section>
@@ -223,7 +223,7 @@ it("tracks that it has been called", function() {
 					<h4>Testing</h4>
 					<aside class="notes">
 						11 of 16<br>
-						Now we can create some assertions, in "it" blocks.  Jasmine Spies have special matchers, like this one, toHaveBeenCalled().  All this matcher does is verify that the function has been called at least one time.
+						Now we can create some assertions, in the "it" blocks.  Jasmine Spies have special matchers, like this one, toHaveBeenCalled().  All this matcher does is verify that the function has been called at least once.
 					</aside>
 				</section>
 				<section>
@@ -243,8 +243,8 @@ it("when called, returns the requested value",
 					<h4>Testing</h4>
 					<aside class="notes">
 						12 of 16<br>
-						Now that we have created the mock data, created our function to spy on, then spied on it with a Jasmine Spy, now we can finally test our mock api data.  We can treat the spied on function like any other function in our test suite, and create assertions to test the data.
-						<br>And, finally, let's step back and review.
+						Now that we have created the mock data, created our function to spy on, then spied on it with a Jasmine Spy, we can finally test our mock API data.  We can treat the spied on function like any other function in our test suite, and create assertions to test the data.
+						<br>And, finally, let's review!
 					</aside>
 				</section>
 				<section>
@@ -273,7 +273,7 @@ it("when called, returns the requested value",
 <code data-trim data-noescape>
 var Spy = function() {};
 
-// the actual api call would normally happen here
+// the actual API call would normally happen here
 Spy.api_data = {};
 
 // this is the function we are testing
@@ -285,7 +285,7 @@ Spy.call_api = function(spy_name){
 </pre>
 					<aside class="notes">
 						14 of 16<br>
-						I have the code I used for these examples hosted at my github account, if you want to take a closer look.  In the repo, there is an object in one file (the code), and three tests and the data api mock, used with a Jasmine Spy, in the test spec.  You can install Jasmine, download the repo into a local folder, and just type Jasmine at the command line to run the tests.
+						I have the code I used for these examples hosted at my github account, if you want to take a closer look.  In the repo, there is an object in one file (the code), and three tests and the data API mock, used with a Jasmine Spy, in the test spec.  You can install Jasmine, download the repo into a local folder, and just type Jasmine at the command line to run the tests.
 					</aside>
 				</section>
 				<section>
@@ -295,7 +295,7 @@ Spy.call_api = function(spy_name){
 					<img src="images/spy-busstop.jpg" width="400px" />
 					<aside class="notes">
 						15 of 16<br>
-						All of these examples were using Jasmine 2.0.  Just an FYI, there were some specific syntax updates for Jasmine Spies in Jasmine version 2.0.  These syntax changes ARE listed in the Jasmine documentation.
+						All of these examples were created using Jasmine 2.0.  Just an FYI, there were some syntax changes for Jasmine Spies in Jasmine 2.0.  These syntax changes ARE listed in the Jasmine documentation.
 					</aside>
 				</section>
 				<section>
@@ -317,7 +317,7 @@ Spy.call_api = function(spy_name){
 					</div>
 					<aside class="notes">
 						16 of 16<br>
-						Thanks for listening, and I hope I have been able to give you a quick taste of what it's like to use Jasmine Spies to test mock api data.  Cheers!
+						Thanks for listening, and I hope I have been able to give you a quick taste of what it's like to use Jasmine Spies to test mock API data.  Cheers!
 					</aside>
 				</section>
 			</div>
